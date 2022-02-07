@@ -38,7 +38,7 @@ public class IngredientController {
     @PutMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Something went wrong")})
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     public void updateIngredient(@Valid @RequestBody IngredientDTO ingredientDto,
                                  @NotNull(message = "ID is mandatory")
                                  @Min(value = 1, message = "ID must be higher than 0") @PathVariable Long id) {
@@ -48,7 +48,7 @@ public class IngredientController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 404, message = "Ingredient not found")})
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @PatchMapping("/{id}")
     public void updateStatusIngredient(@NotNull(message = "ID is mandatory") @Min(value = 1, message = "ID must be higher than 0") @PathVariable Long id,
                                        @NotNull(message = "Status is mandatory") @RequestParam boolean status) {
@@ -58,7 +58,7 @@ public class IngredientController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 404, message = "Ingredient not found")})
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/{id}")
     public Ingredient getIngredient(@NotNull(message = "ID is mandatory") @Min(value = 1, message = "ID must be higher than 0") @PathVariable Long id) {
         return ingredientService.getIngredientById(id);

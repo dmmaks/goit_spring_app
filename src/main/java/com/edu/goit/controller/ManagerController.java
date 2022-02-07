@@ -46,7 +46,7 @@ public class ManagerController {
             @RequestParam(value = "order", defaultValue = "true", required = false) boolean order,
             @RequestParam(value = "gender", defaultValue = "", required = false) String gender,
             @RequestParam(value = "status", defaultValue = "", required = false) String status){
-        return accountService.getAllBySearchModerators(search, currentPage, size, order, gender, status);
+        return accountService.getAllUsersBySearch(search, currentPage, size, order, gender, status);
     }
 
      /**
@@ -71,7 +71,7 @@ public class ManagerController {
     @PutMapping("/{id}")
     @ApiResponse(code = 404, message = "There is no account with such id")
     public HttpStatus updateStatus(@PathVariable long id) {
-        accountService.updateModerStatus(id);
+        accountService.updateUserStatus(id);
         return HttpStatus.OK;
     }
 }

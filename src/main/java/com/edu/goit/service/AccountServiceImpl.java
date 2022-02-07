@@ -132,7 +132,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void updateModerStatus(long id) {
+    public void updateUserStatus(long id) {
         try {
             accountRepository.updateStatus(id);
         } catch (DataAccessException ex) {
@@ -149,11 +149,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public PaginationDTO<AccountPersonalInfoDTO> getAllBySearchModerators(String search, int currentPage, int limit,
-                                                                          boolean order, String gender, String status) {
-        int totalElements = accountRepository.countAccountsBySearch(search, AccountRole.ROLE_MODERATOR, gender, status);
+    public PaginationDTO<AccountPersonalInfoDTO> getAllUsersBySearch(String search, int currentPage, int limit,
+                                                                     boolean order, String gender, String status) {
+        int totalElements = accountRepository.countAccountsBySearch(search, AccountRole.ROLE_USER, gender, status);
         Collection<Account> accounts = accountRepository.findAccountsBySearch(
-                search, gender, AccountRole.ROLE_MODERATOR, status, limit,  currentPage * limit, order
+                search, gender, AccountRole.ROLE_USER, status, limit,  currentPage * limit, order
         );
         return new PaginationDTO<>(accountMapper.accountsToPersonalInfoDtoCollection(accounts),  totalElements);
     }

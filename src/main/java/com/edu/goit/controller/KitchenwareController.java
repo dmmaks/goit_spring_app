@@ -23,7 +23,7 @@ public class KitchenwareController {
         this.kitchenwareService = kitchenwareService;
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping(value = "/categories")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Something went wrong")})
@@ -31,7 +31,7 @@ public class KitchenwareController {
         return kitchenwareService.getAllCategories();
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Kitchenware has been added"),
@@ -42,7 +42,7 @@ public class KitchenwareController {
         return dto;
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Update successful"),
@@ -54,7 +54,7 @@ public class KitchenwareController {
         return dto;
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping(value = "/changeStatus/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Change successful"),
@@ -64,7 +64,7 @@ public class KitchenwareController {
         kitchenwareService.changeKitchenwareStatus(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping(value = "/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Something went wrong"),
@@ -73,7 +73,7 @@ public class KitchenwareController {
         return kitchenwareService.getKitchenwareById(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR', 'ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Bad request")})

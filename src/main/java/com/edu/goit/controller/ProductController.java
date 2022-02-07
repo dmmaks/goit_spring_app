@@ -26,7 +26,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Product has been added"),
@@ -36,7 +36,7 @@ public class ProductController {
         return dto;
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Update successful"),
@@ -48,8 +48,8 @@ public class ProductController {
         return dto;
     }
 
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    @DeleteMapping(value = "/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping(value = "/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Change successful"),
             @ApiResponse(code = 400, message = "Something went wrong"),

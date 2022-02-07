@@ -24,5 +24,6 @@ public class ProductDTO {
     @Pattern(regexp = "[+-]?([0-9]*[.])?[0-9]+", message = "price should be numeric")
     String price;
     @NotNull(message = "manufacturer is mandatory")
-    long manufacturerId;
+    @Pattern(regexp = "[+-]?([0-9]*[.])?[0-9]+", message = "price should be numeric")
+    String manufacturerId;
 }

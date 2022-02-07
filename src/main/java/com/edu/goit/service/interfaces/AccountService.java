@@ -12,7 +12,7 @@ public interface AccountService {
     void signUp (AccountDTO accountDTO);
     UpdateAccountDTO getUserInfoByEmail(String email);
     AccountPersonalInfoDTO findById (long id);
-    PaginationDTO<AccountPersonalInfoDTO> getAllBySearchModerators(String search, int currentPage, int limit, boolean order, String gender, String status);
+    PaginationDTO<AccountPersonalInfoDTO> getAllUsersBySearch(String search, int currentPage, int limit, boolean order, String gender, String status);
     void updatePersonalInfo(AccountPersonalInfoDTO accountDto);
-    void updateModerStatus(long id);
+    void updateUserStatus(long id);
 }
