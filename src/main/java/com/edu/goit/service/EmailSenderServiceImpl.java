@@ -29,9 +29,4 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     public void sendResetLinkPassword(String to, String token) {
         sendSimpleMessage(to, "Reset Link Password", String.format("Reset Link Password: %s/account/reset-password/%s", currentlyDomainClient, token));
     }
-
-    @Override
-    public void sendNewModerLinkPassword(String to, String token) {
-        sendSimpleMessage(to, "Password creation", String.format("Password creation link: %s/account/confirm-moderator/%s", currentlyDomainClient, token));
-    }
 }

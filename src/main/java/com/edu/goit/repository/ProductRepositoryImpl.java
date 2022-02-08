@@ -1,8 +1,5 @@
 package com.edu.goit.repository;
-import com.edu.goit.model.Kitchenware;
-import com.edu.goit.model.Manufacturer;
 import com.edu.goit.model.Product;
-import com.edu.goit.repository.interfaces.ManufacturerRepository;
 import com.edu.goit.repository.interfaces.ProductRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

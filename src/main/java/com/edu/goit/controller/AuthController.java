@@ -1,15 +1,12 @@
 package com.edu.goit.controller;
 
 import com.edu.goit.dto.AccountDTO;
-import com.edu.goit.exception.CustomException;
 import com.edu.goit.model.payload.AuthRequestResetUpdatePassword;
 import com.edu.goit.model.payload.AuthResponse;
 import com.edu.goit.service.interfaces.AccountService;
-import com.edu.goit.service.interfaces.ModerCreationService;
 import com.edu.goit.service.interfaces.PasswordResetTokenService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +22,10 @@ import javax.validation.constraints.NotNull;
 public class AuthController {
     private final AccountService accountService;
     private final PasswordResetTokenService passResetTokenService;
-    private final ModerCreationService moderCreationService;
 
-    public AuthController (AccountService accountService, PasswordResetTokenService passResetTokenService, ModerCreationService moderCreationService) {
+    public AuthController (AccountService accountService, PasswordResetTokenService passResetTokenService) {
         this.accountService = accountService;
         this.passResetTokenService = passResetTokenService;
-        this.moderCreationService = moderCreationService;
     }
 
     @PostMapping("/signin")
@@ -76,27 +71,5 @@ public class AuthController {
         passResetTokenService.changePassword(modelResetUpdatePassword);
     }
 
-
-
-    @GetMapping(value = "/password/creation")
-    @ApiResponses(value = {
-            @ApiResponse(code = 410, message = "invalid token"),
-            @ApiResponse(code = 404, message = "token not found")})
-    public boolean passwordCreation(@RequestParam @NotNull(message = "Token link is mandatory") @NotBlank(message = "Token link is mandatory") String token) {
-        return moderCreationService.validateModerToken(token);
-    }
-
-
-    @PutMapping("/password/creation")
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Passwords do not match"),
-            @ApiResponse(code = 410, message = "invalid token"),
-            @ApiResponse(code = 404, message = "token not found")})
-    public HttpStatus passwordCreationUpdate(@Valid @RequestBody AuthRequestResetUpdatePassword modelResetUpdatePassword) {
-        if (!modelResetUpdatePassword.getPassword().equals(modelResetUpdatePassword.getConfirmPassword()))
-            throw new CustomException(HttpStatus.BAD_REQUEST, "Passwords do not match");
-        moderCreationService.createAccount(modelResetUpdatePassword);
-        return HttpStatus.OK;
-    }
 
 }
